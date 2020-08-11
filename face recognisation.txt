@@ -1,0 +1,31 @@
+import cv2
+
+cap=cv2.VideoCapture(0)# VideoCapture helps to streaming and wrap the content
+#By default for the location 0 it point to your webcam 
+
+detector = cv2.CascadeClassifier(r"C:\Users\HP\Desktop\Face recognisation\haarcascade_frontalface_alt.xml")
+
+while True: #we will keep on repeating it (while)
+    # in this loop we have to capture for our stream
+    # we have to do cap.read(), it will take two parameter(ret,frame) these
+    # are two values which are returned from cap.read()
+    
+    ret,frame=cap.read()
+    
+    if ret:  # if ret is true
+        faces = detector.detectMultiScale(frame)
+        
+        for face in faces:
+            x, y, w, h = face
+            
+            cut = frame[y:y+h, x:x+w]
+
+        cv2.imshow("My screen",frame) # we have to show in screen
+        cv2.imshow("My Face",cut)
+    key = cv2.waitkey(1)# it wait for 1 millisecond to get the content fron webcam
+
+    if key == ord("q"):
+        break
+    
+cap.release()
+cv2.destroyAllWindows()    
