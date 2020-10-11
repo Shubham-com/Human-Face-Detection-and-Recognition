@@ -13,6 +13,11 @@ import matplotlib.pyplot as plt
 img=plt.imread(r"C:\Users\HP\Desktop\Face recognisation\images.jpg")
 plt.imshow(img)
 
+img.shape #It is showing the shape of the image(No.of rows, No of columns,Depth of image)
+#Each layer consist of (R,G,B i.e Red,Green,Blue (depth i.e..3))
+gray=img.mean(axis=2)
+plt.imshow(gray,cmap="gray")#Colour Map to represent the item
+
 detector=cv2.CascadeClassifier(r"C:\Users\HP\Desktop\Face recognisation\haarcascade_frontalface_alt.xml")
 faces=detector.detectMultiScale(img)
 faces
